@@ -73,7 +73,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     @IBAction func save(_ sender: UIButton) {
         
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            
+            // Day 53 - Challenge 1: show an error if there is no image in the image view
+            let ac = UIAlertController(title: "Error", message: "Image does not exist.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            
+            return
+            
+        }
         
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError: contextInfo:)), nil)
     }
