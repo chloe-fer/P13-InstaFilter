@@ -51,6 +51,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     @IBAction func changeFilter(_ sender: UIButton) {
         
+        // Day 53 - Challenge 1: show an error if there is no image in the image view
+        guard imageView.image != nil else {
+            imageErrorAlert()
+            return
+        }
+        
         let ac = UIAlertController(title: "Choose filter", message: nil, preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "CIBumpDistortion", style: .default, handler: setFilter))
         ac.addAction(UIAlertAction(title: "CIGaussianBlur", style: .default, handler: setFilter))
@@ -68,17 +74,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         
         present(ac, animated: true)
 
-
     }
     
     @IBAction func save(_ sender: UIButton) {
         
         guard let image = imageView.image else {
             
-            // Day 53 - Challenge 1: show an error if there is no image in the image view
-            let ac = UIAlertController(title: "Error", message: "Image does not exist.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
+            imageErrorAlert()
             
             return
             
@@ -155,6 +157,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         
     }
     
+    func imageErrorAlert() {
+        
+        // Day 53 - Challenge 1: show an error if there is no image in the image view
+        let ac = UIAlertController(title: "Error", message: "Image does not exist.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        
+    }
     
 }
 
