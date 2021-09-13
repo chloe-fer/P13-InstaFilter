@@ -137,6 +137,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         guard currentImage != nil else { return }
         guard let actionTitle = action.title else { return }
         
+        // Day 53 - Challenge 2: change title to show currently selected CIFilter name
+        title = action.title
+        
         currentFilter = CIFilter(name: actionTitle)
         
         let beginImage = CIImage(image: currentImage)
