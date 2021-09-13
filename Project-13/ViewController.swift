@@ -13,6 +13,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
+    @IBOutlet var radius: UISlider!
+    
     
     var currentImage: UIImage!
     
@@ -93,6 +95,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         applyProcessing()
     }
     
+    // Day 53 - Challenge 3: add a radius slider to control radius value
+    @IBAction func radiusChanged(_ sender: UISlider) {
+        applyProcessing()
+    }
+    
     func applyProcessing() {
         
         let inputKeys = currentFilter.inputKeys
@@ -102,7 +109,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         }
         
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
