@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var intensity: UISlider!
     @IBOutlet var radius: UISlider!
+    @IBOutlet var scale: UISlider!
     
     
     var currentImage: UIImage!
@@ -113,7 +114,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
-            currentFilter.setValue(intensity.value * 10, forKey: kCIInputScaleKey)
+            currentFilter.setValue(scale.value * 10, forKey: kCIInputScaleKey)
         }
         
         if inputKeys.contains(kCIInputCenterKey) {
@@ -133,7 +134,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         // core image -> core graphics -> UIImage
         if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
             let processedImage = UIImage(cgImage: cgImage)
+            
+            // Day 58 - C2: make image view fade in when new picture is chosen.
+            imageView.alpha = 0
             imageView.image = processedImage
+            UIView.animate(withDuration: 1) {
+                self.imageView.alpha = 1
+            }
         }
     }
     
